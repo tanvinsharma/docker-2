@@ -1,6 +1,9 @@
-RSpec.describe 'Elastic Search test' do
-  specify do
-    client = Elasticsearch::Client.new(log: true)
-    client.cluster.health
-  end
+RSpec.describe 'Elasticsearch test' do
+	# require 'elasticsearch'
+	let(:client) { Elasticsearch::Client.new url: 'https://localhost:9200', log: true	}
+	# client.cluster.health
+	# expect(client.cluster.health.status).to eq("green")
+	specify do
+		expect(client.cluster.health.status).to eq("green")
+	end
 end

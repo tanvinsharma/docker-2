@@ -21,18 +21,6 @@ services:
         - discovery.type=single-node
         - xpack.security.enabled=false
         - xpack.security.transport.ssl.enabled=false
-        # - cluster.name=docker-cluster
-        # - bootstrap.memory_lock=true
-        # - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        # - xpack.security.enabled=false
-        # - xpack.monitoring.enabled=false
-        # - xpack.graph.enabled=false
-        # - xpack.watcher.enabled=false
-        # - transport.host="0.0.0.0"
-      ulimits:
-        memlock:
-          soft: -1
-          hard: -1
       volumes:
         - elasticsearch:/usr/share/elasticsearch/data
       ports:
@@ -53,6 +41,9 @@ services:
       - db
       - elasticsearch
       - redis
+    environment:
+      - ELASTIC_HOST="elasticsearch"
+      - ELASTIC_PORT="9200"
 
 volumes:
   redis:
