@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ansi (1.5.0)
     bindex (0.8.1)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -94,6 +95,9 @@ GEM
       elasticsearch-transport (= 7.17.1)
     elasticsearch-api (7.17.1)
       multi_json
+    elasticsearch-extensions (0.0.33)
+      ansi
+      elasticsearch
     elasticsearch-model (7.2.1)
       activesupport (> 3)
       elasticsearch (~> 7)
@@ -276,6 +280,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  elasticsearch-extensions
   elasticsearch-model
   elasticsearch-rails
   importmap-rails
