@@ -5,4 +5,6 @@ docker compose run rails db:setup
 docker compose up --build
 docker compose run web bundle exec rspec
 
-and if you're lucky, it might work 
+current status:
+elastic search got my tests failing, even redis test wont work now, 
+in the process of fixing it
