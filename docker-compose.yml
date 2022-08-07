@@ -16,15 +16,16 @@ services:
       - 'redis:/data'
 
   elasticsearch:
-      image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
-      environment:
-        - discovery.type=single-node
-        - xpack.security.enabled=false
-        - xpack.security.transport.ssl.enabled=false
-      volumes:
-        - elasticsearch:/usr/share/elasticsearch/data
-      ports:
-        - 9200:9200
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.transport.ssl.enabled=false
 
   web:
     build: .
@@ -42,8 +43,9 @@ services:
       - elasticsearch
       - redis
     environment:
-      - ELASTIC_HOST="elasticsearch"
-      - ELASTIC_PORT="9200"
+      # - ELASTIC_HOST="elasticsearch"
+      # - ELASTIC_PORT="9200"
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
 
 volumes:
   redis:
