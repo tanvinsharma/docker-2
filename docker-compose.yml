@@ -7,29 +7,6 @@ services:
     environment:
       POSTGRES_PASSWORD: password
   
-  elasticsearch:
-      image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
-      environment:
-        - discovery.type=single-node
-        - xpack.security.enabled=false
-        - xpack.security.transport.ssl.enabled=false
-        # - cluster.name=docker-cluster
-        # - bootstrap.memory_lock=true
-        # - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        # - xpack.security.enabled=false
-        # - xpack.monitoring.enabled=false
-        # - xpack.graph.enabled=false
-        # - xpack.watcher.enabled=false
-        # - transport.host="0.0.0.0"
-      ulimits:
-        memlock:
-          soft: -1
-          hard: -1
-      volumes:
-        - elasticsearch:/usr/share/elasticsearch/data
-      ports:
-        - 9200:9200
-
   redis:
     image: 'redis'
     command: redis-server
@@ -38,24 +15,38 @@ services:
     volumes:
       - 'redis:/data'
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    environment:
-      - ELASTICSEARCH_HOST=elasticsearch
     volumes:
       - .:/myapp
     ports:
       - "3000:3000"
-    links:
-      - db
-      - elasticsearch
-      - redis
     depends_on:
       - db
       - redis
       - elasticsearch
+    links:
+      - db
+      - elasticsearch
+      - redis
+    environment:
+      # - ELASTIC_HOST="elasticsearch"
+      # - ELASTIC_PORT="9200"
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
 
 volumes:
   redis:
-  elasticsearch:
+  elasticsearch: 

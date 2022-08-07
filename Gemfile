@@ -73,5 +73,5 @@ group :test do
 end
 
 gem "rspec-rails"
-gem "elasticsearch-model"
-gem "elasticsearch-rails"
+gem "elasticsearch"
+
