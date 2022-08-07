@@ -69,7 +69,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'elasticsearch-extensions'
 end
 
 gem "rspec-rails"
 gem "elasticsearch"
+
