@@ -43,8 +43,8 @@ services:
       - elasticsearch
       - redis
     environment:
-      # - ELASTIC_HOST="elasticsearch"
-      # - ELASTIC_PORT="9200"
+      - ELASTIC_HOST="elasticsearch"
+      - ELASTIC_PORT="9200"
       - ELASTICSEARCH_URL=http://elasticsearch:9200
 
 volumes:

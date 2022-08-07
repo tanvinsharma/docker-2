@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ansi (1.5.0)
     bindex (0.8.1)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -97,6 +98,9 @@ GEM
       elasticsearch-api (= 8.3.0)
     elasticsearch-api (8.3.0)
       multi_json
+    elasticsearch-extensions (0.0.33)
+      ansi
+      elasticsearch
     erubi (1.11.0)
     faraday (1.10.0)
       faraday-em_http (~> 1.0)
@@ -271,6 +275,7 @@ DEPENDENCIES
   capybara
   debug
   elasticsearch
+  elasticsearch-extensions
   importmap-rails
   jbuilder
   pg (~> 1.1)
