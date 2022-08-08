@@ -1,4 +1,4 @@
-#Instructions:
+# Instructions:
 
 docker compose run web bundle install <br /> 
 docker compose run rails db:setup<br /> 
